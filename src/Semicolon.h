@@ -12,6 +12,7 @@ class Semicolon: public Operator
 
     int execute()
     {
-
+        leftChild->execute();
+        rightChild->execute();
     }    
 };

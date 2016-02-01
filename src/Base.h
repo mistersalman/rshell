@@ -3,6 +3,7 @@
 
 class Base
 {
-    virtual int execute() = 0;
+    public:
+        virtual int execute() = 0;
 };
 #endif

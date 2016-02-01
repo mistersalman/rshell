@@ -11,6 +11,11 @@ class Or: public Operator
     }
 
     int execute(){
-
+        int check = leftChild->execute();
+        if(check == 0)
+        {
+            return rightChild->execute();
+        }
+        return 1;
     }
 };

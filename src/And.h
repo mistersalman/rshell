@@ -3,7 +3,12 @@
 class And: public Operator
 {
     int execute(){
-
+        int check = leftChild->execute();
+        if(check == 1)
+        {
+            return rightChild->execute();
+        }
+        return 0;
     }
 
     And() {};
