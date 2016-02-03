@@ -7,5 +7,7 @@
 #include "Terminal.h"
 
 int main(){
+    Terminal test;
+    test.Run();
     return 0;
 }

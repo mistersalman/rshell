@@ -2,18 +2,23 @@
 #include<string>
 #include<iostream>
 #include<stdlib.h>
+#include <unistd.h>
 
 using namespace std;
 
 class Terminal
 {
     public:
+        Terminal() {commandList = 0;}
+
         void Run()
         {
             //code to run the terminal
-            GetLogin();
-            GetHostName();
-            while(true){
+            GetLogin(login);
+            GetHostName(hostName);
+            bool run = true;
+            while(run){
+                cout << '[' << login << "@" << hostName << ']' << '$' << ' ';
                 ReadInput();
                 Execute();
             }
@@ -27,17 +32,21 @@ class Terminal
         Base* commandList;
 
     private:
-        string login;
-        string hostName;
+        char login[256];
+        char hostName[256];
 
-        void GetLogin()
+        void GetLogin(char* Login)
         {
             //gets user name for extra credit
+            getlogin_r(Login, 256);
+            return;
         }
 
-        void GetHostName()
+        void GetHostName(char* name)
         {
             //gets host name for extra credit
+            gethostname(name, 256);
+            return;
         }
 
         void ReadInput()
@@ -57,6 +66,9 @@ class Terminal
         {
             //Read in element from vector (will need to parse them), execute
             // corresponding command, and delete vector entry
-            commandList->execute();
+            if (this->commandList != 0)
+            {
+                this->commandList->execute();
+            }
         }
 };
