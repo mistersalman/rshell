@@ -12,7 +12,16 @@ class Semicolon: public Operator
 
     int execute()
     {
-        leftChild->execute();
-        rightChild->execute();
+        int check = leftChild->execute();
+        if(int == -1)
+        {
+            //return -1 if left child calls exit and returns -1
+            return -1;
+        }
+        else
+        {
+            //return whatever right child returns if left child does not call exit
+            return rightChild->execute();
+        }
     }    
 };

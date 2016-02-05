@@ -5,7 +5,7 @@ using namespace std;
 
 class Operand: public Base
 {
-    char data[256];
+    char* data[256];
 
     Operand() {}
 
@@ -16,6 +16,11 @@ class Operand: public Base
 
     int execute()
     {
+        if(data == "Exit" || data == "exit")
+        {
+            return -1;
+        }
+
 
     }
 };
