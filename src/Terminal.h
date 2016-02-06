@@ -54,6 +54,10 @@ class Terminal
             //reads user input
             string command;
             getline(cin, command);
+            if(command.find("#") != string:npos)
+            {
+                command = command.substr(0, command.find("#"));
+            }
             Decipher(command);
         }
 
