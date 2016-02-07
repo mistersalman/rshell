@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <vector>
+#include <unistd.h>
+
 
 using namespace std;
 
@@ -60,5 +62,6 @@ class Operand: public Base
         {
             return -1;
         }
+        return 0;
     }
 };
