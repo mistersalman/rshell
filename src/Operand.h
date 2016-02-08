@@ -29,7 +29,10 @@ class Operand: public Base
         vector<char *> refs;
         char * pch;
         pch = strtok(dat, "/ ");
-        //broken loop
+        
+        refs.push_back("/bin/bash");
+        refs.push_back("-c");
+
         while(pch != NULL)
         {
             refs.push_back(pch);
@@ -40,7 +43,6 @@ class Operand: public Base
         int j = -1;
         for(int i = 0; i < refs.size(); i++)
         {
-            cout << refs.at(i) << endl << endl << endl;
             if(refs.at(i) == "Exit" || refs.at(i) == "exit")
             {
                 j = i;
