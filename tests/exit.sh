@@ -1,7 +1,6 @@
 # !/bin.bash
 # test exit
 
-cd ../src
-g++ main.cpp
-./a.out
-exit
+g++ ../src/main.cpp
+echo test strating
+../src/a.out<exit.sh
