@@ -75,7 +75,7 @@ class Terminal
                 {
                     if (commandList == 0)
                     {
-                        op = cmd.substr(0, i-1);
+                        op = cmd.substr(0, i);
                         cmd = cmd.substr(i+2, cmd.size()-1);
                         i = 0;
                         commandList = new Operand(op);
@@ -83,7 +83,7 @@ class Terminal
                     }
                     else
                     {
-                        op = cmd.substr(0, i-1);
+                        op = cmd.substr(0, i);
                         cmd = cmd.substr(i+2, cmd.size());
                         i = 0;
                         tmp = new Operand(op);
@@ -109,7 +109,7 @@ class Terminal
                 {
                     if (commandList == 0)
                     {
-                        op = cmd.substr(0, i-1);
+                        op = cmd.substr(0, i);
                         cmd = cmd.substr(i+2, cmd.size()-1);
                         i = 0;
                         commandList = new Operand(op);
@@ -117,7 +117,7 @@ class Terminal
                     }
                     else
                     {
-                        op = cmd.substr(0, i-1);
+                        op = cmd.substr(0, i);
                         cmd = cmd.substr(i+2, cmd.size());
                         i = 0;
                         tmp = new Operand(op);
@@ -144,7 +144,7 @@ class Terminal
                 {
                     if (commandList == 0)
                     {
-                        op = cmd.substr(0, i-1);
+                        op = cmd.substr(0, i);
                         cmd = cmd.substr(i+1, cmd.size()-1);
                         i = 0;
                         commandList = new Operand(op);
@@ -152,7 +152,7 @@ class Terminal
                     }
                     else
                     {
-                        op = cmd.substr(0, i-1);
+                        op = cmd.substr(0, i);
                         cmd = cmd.substr(i+1, cmd.size());
                         i = 0;
                         tmp = new Operand(op);
