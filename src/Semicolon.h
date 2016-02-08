@@ -13,7 +13,7 @@ class Semicolon: public Operator
     int execute()
     {
         int check = leftChild->execute();
-        if(int == -1)
+        if(check == -1)
         {
             //return -1 if left child calls exit and returns -1
             return -1;

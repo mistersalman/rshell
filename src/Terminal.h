@@ -54,7 +54,7 @@ class Terminal
             //reads user input
             string command;
             getline(cin, command);
-            if(command.find("#") != string:npos)
+            if(command.find("#") != string::npos)
             {
                 command = command.substr(0, command.find("#"));
             }
@@ -64,6 +64,32 @@ class Terminal
         void Decipher(string c)
         {
             //use keystroke to separate keywords from input stored
+            Base* tmp;
+            Base* tmp2;
+            string cmd = c;
+            cout << "start loop" << endl;
+            for (unsigned i = 0; i < cmd.size() - 1; ++i)
+            {
+                if (cmd.at(i) == '&' && cmd.at(i+1) == '&')
+                {
+
+                }
+                else if (cmd.at(i) == '|' && cmd.at(i+1) == '|')
+                {
+
+                }
+                else if (cmd.at(i) == ';')
+                {
+
+                }
+            }
+            cout << "end loop" << endl;
+            tmp = new Operand(cmd);
+            if (commandList == 0)
+            {
+                commandList = tmp;
+            }
+            
         }
 
         void Execute()

@@ -4,13 +4,16 @@
 #include <string.h>
 #include <vector>
 #include <unistd.h>
-
+#include <iostream>
 
 using namespace std;
 
 class Operand: public Base
 {
+    private:
     string data;
+
+    public:
 
     Operand() {}
 
@@ -28,10 +31,12 @@ class Operand: public Base
         pch = strtok(dat, "/ ");
         while(pch != NULL)
         {
+            cout << "loop check" << endl;
             refs.push_back(pch);
             pch = NULL;
             pch = strtok(dat, "/ ");
         }
+        cout << "end while loop 1" << endl;
 
         int j = -1;
         for(int i = 0; i < refs.size(); i++)
