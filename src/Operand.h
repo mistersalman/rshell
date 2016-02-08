@@ -28,7 +28,7 @@ class Operand: public Base
         strcpy(dat, data.c_str());
         vector<char *> refs;
         char * pch;
-        pch = strtok(dat, "/ ");
+        pch = strtok(dat, "/");
         
         refs.push_back("/bin/bash");
         refs.push_back("-c");
@@ -37,7 +37,7 @@ class Operand: public Base
         {
             refs.push_back(pch);
             pch = NULL;
-            pch = strtok(NULL, "/ ");
+            pch = strtok(NULL, "/");
         }
 
         int j = -1;
