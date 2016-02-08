@@ -34,12 +34,13 @@ class Operand: public Base
         {
             refs.push_back(pch);
             pch = NULL;
-            pch = strtok(dat, "/ ");
+            pch = strtok(NULL, "/ ");
         }
 
         int j = -1;
         for(int i = 0; i < refs.size(); i++)
         {
+            cout << refs.at(i) << endl << endl << endl;
             if(refs.at(i) == "Exit" || refs.at(i) == "exit")
             {
                 j = i;
