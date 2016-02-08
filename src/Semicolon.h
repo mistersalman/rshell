@@ -2,6 +2,7 @@
 
 class Semicolon: public Operator
 {
+    public:
     Semicolon() {}
 
     Semicolon(Base* left, Base* right)

@@ -2,6 +2,7 @@
 
 class And: public Operator
 {
+    public:
     And() {};
 
     And(Base* left, Base* right)

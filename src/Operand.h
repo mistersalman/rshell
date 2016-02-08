@@ -29,14 +29,13 @@ class Operand: public Base
         vector<char *> refs;
         char * pch;
         pch = strtok(dat, "/ ");
+        //broken loop
         while(pch != NULL)
         {
-            cout << "loop check" << endl;
             refs.push_back(pch);
             pch = NULL;
             pch = strtok(dat, "/ ");
         }
-        cout << "end while loop 1" << endl;
 
         int j = -1;
         for(int i = 0; i < refs.size(); i++)

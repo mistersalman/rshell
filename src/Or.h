@@ -2,6 +2,7 @@
 
 class Or: public Operator
 {
+    public:
     Or() {};
 
     Or(Base* left, Base* right)
