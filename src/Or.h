@@ -12,10 +12,17 @@ class Or: public Operator
 
     int execute(){
         int check = leftChild->execute();
-        if(check == 0)
+        if(check == 1)
         {
+            //returns whatever right child returns
             return rightChild->execute();
         }
-        return 1;
+        else if(check == -1)
+        {
+            //returns -1 because left child called exit
+            return -1;
+        }
+        //returns 0 because left child succeeded
+        return 0;
     }
 };

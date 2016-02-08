@@ -1,7 +1,7 @@
 #include "Base.h"
-#include<string>
-#include<iostream>
-#include<stdlib.h>
+#include <string>
+#include <iostream>
+#include <stdlib.h>
 #include <unistd.h>
 
 using namespace std;
@@ -26,7 +26,7 @@ class Terminal
 
         void Exit()
         {
-            //deconstruct tree then exits
+            //de-construct tree then exits
             exit(0);
         }
         Base* commandList;
@@ -54,6 +54,10 @@ class Terminal
             //reads user input
             string command;
             getline(cin, command);
+            if(command.find("#") != string:npos)
+            {
+                command = command.substr(0, command.find("#"));
+            }
             Decipher(command);
         }
 
