@@ -5,6 +5,8 @@
 #include <vector>
 #include <unistd.h>
 #include <iostream>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 using namespace std;
 
@@ -60,10 +62,32 @@ class Operand: public Base
             args[l] = refs.at(l);
         }
         
-        if(execvp(args[0], args) == -1)
+        pid_t pid;
+        int status;
+
+        if((pid = fork()) < 0)
+        {
+            printf("Serious error.\n");
+        }
+
+        else if(pid == 0)
+        {
+            if(execvp(args[0], args) < 0)
+            {
+                printf("Error, execution failed\n");
+                return 1;
+            }
+        }
+
+        else
+        {
+            while(wait(&status) !=pid);
+        }
+
+       /* if(execvp(args[0], args) == -1)
         {
             return 1;
-        }
+        }*/
 
         if(j < refs.size())
         {
