@@ -25,6 +25,11 @@ class Operand: public Base
         data = d;
     }
 
+    void clean()
+    {
+        return;
+    }
+
     int execute()
     {
         if (data == "exit" || data == "Exit")
