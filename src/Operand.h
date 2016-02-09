@@ -7,6 +7,7 @@
 #include <iostream>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -72,7 +73,8 @@ class Operand: public Base
 
         if(pid  < 0)
         {
-            printf("Serious error.\n");
+            printf("Serious Error.\n");
+            exit(1);
         }
 
         else if(pid != 0)
@@ -84,21 +86,10 @@ class Operand: public Base
         {
             if(execvp(args[0], args) < 0)
             {
-                printf("Error, execution failed\n");
-                return 1;
+                perror("Error, Execution Failed\n");
+                exit(1);
             }
             return 0;
-        }
-
-
-       /* if(execvp(args[0], args) == -1)
-        {
-            return 1;
-        }*/
-
-        if(j < refs.size())
-        {
-            return -1;
         }
         return 0;
     }
