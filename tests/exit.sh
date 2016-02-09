@@ -3,4 +3,5 @@
 
 g++ ../src/main.cpp
 echo test strating
-../src/a.out<exit.sh
+../src/a.out < exit.txt
+echo "finished"

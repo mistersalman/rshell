@@ -26,6 +26,10 @@ class Operand: public Base
 
     int execute()
     {
+        if (data == "exit" || data == "Exit")
+        {
+            return -1;
+        }
         char *dat = new char[data.length() + 1];
         strcpy(dat, data.c_str());
         vector<char *> refs;
@@ -41,6 +45,7 @@ class Operand: public Base
             pch = NULL;
             pch = strtok(NULL, "/");
         }
+        refs.push_back(NULL);
 
         int j = -1;
         for(int i = 0; i < refs.size(); i++)
@@ -62,12 +67,17 @@ class Operand: public Base
             args[l] = refs.at(l);
         }
         
-        pid_t pid;
+        pid_t pid = fork();
         int status;
 
-        if((pid = fork()) < 0)
+        if(pid  < 0)
         {
             printf("Serious error.\n");
+        }
+
+        else if(pid != 0)
+        {
+            wait(NULL);
         }
 
         else if(pid == 0)
@@ -77,12 +87,9 @@ class Operand: public Base
                 printf("Error, execution failed\n");
                 return 1;
             }
+            return 0;
         }
 
-        else
-        {
-            while(wait(&status) !=pid);
-        }
 
        /* if(execvp(args[0], args) == -1)
         {

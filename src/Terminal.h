@@ -208,7 +208,13 @@ class Terminal
             // corresponding command, and delete vector entry
             if (this->commandList != 0)
             {
-                this->commandList->execute();
+                if (this->commandList->execute() == -1)
+                {
+                    delete commandList;
+                    exit(0);
+                }
             }
+            delete commandList;
+            commandList = 0;
         }
 };

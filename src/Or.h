@@ -1,5 +1,7 @@
 #include "Operator.h"
 
+using namespace std;
+
 class Or: public Operator
 {
     public:
