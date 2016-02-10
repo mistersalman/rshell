@@ -32,7 +32,9 @@ class Operand: public Base
 
     int execute()
     {
-        if (data == "exit" || data == "Exit")
+        string exit = "exit";
+        string Exit = "Exit";
+        if (data == exit || data == Exit)
         {
             return -1; //manually check for exit and actually exit
         }
@@ -41,8 +43,8 @@ class Operand: public Base
         vector<char *> refs; //create vector with tokens from strtok
         char * pch;
         pch = strtok(dat, "/"); //initially used space as token, but found that we didn't need it
-        
-        refs.push_back("/bin/bash"); //this just makes it run
+        pch = strtok("/bin/bash", "/"); 
+        refs.push_back(pch); //this just makes it run
         refs.push_back("-c"); //same
 
         while(pch != NULL) //push back parts of command which have underwent strtok
@@ -54,7 +56,7 @@ class Operand: public Base
         refs.push_back(NULL); //null at end to terminate execvp call once needed
 
         int j = -1;
-        for(int i = 0; i < refs.size(); i++) //one more exit check, but no manual exit yet
+        for(unsigned i = 0; i < refs.size(); i++) //one more exit check, but no manual exit yet
         {
             if(refs.at(i) == "Exit" || refs.at(i) == "exit")
             {
@@ -74,7 +76,6 @@ class Operand: public Base
         }
         
         pid_t pid = fork(); //process of calling fork and execvp begins here
-        int status;
 
         if(pid  < 0) //negative process IDs are errors - exit
         {
