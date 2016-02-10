@@ -52,8 +52,6 @@ class Operand: public Base
             pch = strtok(NULL, "/");
         }
         refs.push_back(NULL);
-        delete pch;
-        delete dat;
 
         int j = -1;
         for(int i = 0; i < refs.size(); i++)
@@ -96,10 +94,12 @@ class Operand: public Base
                 perror("Error, Execution Failed\n");
                 exit(1);
             }
-            delete args;
+            delete[] args;
+            delete pch;
+            delete[] dat;
+            refs.~vector();
             return 0;
         }
-        delete args;
         return 0;
     }
 };

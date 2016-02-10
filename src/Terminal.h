@@ -24,11 +24,6 @@ class Terminal
             }
         }
 
-        void Exit()
-        {
-            //de-construct tree then exits
-            exit(0);
-        }
         Base* commandList;
 
     private:
@@ -176,9 +171,9 @@ class Terminal
 
                 }
             }
-            tmp = new Operand(cmd);
             if (commandList == 0)
             {
+                tmp = new Operand(cmd);
                 commandList = tmp;
             }
             else
@@ -215,6 +210,7 @@ class Terminal
                 }
             }
             commandList->clean();
+            delete commandList;
             commandList = 0;
         }
 };
