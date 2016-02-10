@@ -14,64 +14,64 @@ using namespace std;
 class Operand: public Base
 {
     private:
-    string data;
+    string data; //instance field to hold command
 
     public:
 
-    Operand() {}
+    Operand() {} //default constructor
 
     Operand(string d)
     {
-        data = d;
+        data = d; //constructor with parameter passed it
     }
 
     int execute()
     {
         if (data == "exit" || data == "Exit")
         {
-            return -1;
+            return -1; //manually check for exit and actually exit
         }
-        char *dat = new char[data.length() + 1];
+        char *dat = new char[data.length() + 1]; //create c-string with one extra space for NULL
         strcpy(dat, data.c_str());
-        vector<char *> refs;
+        vector<char *> refs; //create vector with tokens from strtok
         char * pch;
-        pch = strtok(dat, "/");
+        pch = strtok(dat, "/"); //initially used space as token, but found that we didn't need it
         
-        refs.push_back("/bin/bash");
-        refs.push_back("-c");
+        refs.push_back("/bin/bash"); //this just makes it run
+        refs.push_back("-c"); //same
 
-        while(pch != NULL)
+        while(pch != NULL) //push back parts of command which have underwent strtok
         {
             refs.push_back(pch);
             pch = NULL;
             pch = strtok(NULL, "/");
         }
-        refs.push_back(NULL);
+        refs.push_back(NULL); //null at end to terminate execvp call once needed
 
         int j = -1;
-        for(int i = 0; i < refs.size(); i++)
+        for(int i = 0; i < refs.size(); i++) //one more exit check, but no manual exit yet
         {
             if(refs.at(i) == "Exit" || refs.at(i) == "exit")
             {
                 j = i;
             }
         }
-        if(j == -1)
+        if(j == -1) //if there is no exit present in the string, reside array
         {
             j = refs.size();
         }
 
-        char *args[j];
+        char *args[j]; //create array of char pointers with appropriate size
 
-        for(int l = 0; l < j; l++)
+        for(int l = 0; l < j; l++) //copy over vector to char array
         {
             args[l] = refs.at(l);
         }
         
-        pid_t pid = fork();
+        pid_t pid = fork(); //process of calling fork and execvp begins here
         int status;
 
-        if(pid  < 0)
+        if(pid  < 0) //negative process IDs are errors - exit
         {
             printf("Serious Error.\n");
             exit(1);
@@ -82,11 +82,11 @@ class Operand: public Base
             wait(NULL);
         }
 
-        else if(pid == 0)
+        else if(pid == 0) //execvp is called when the process ID is 0, if not, it waits until the process ID is zero
         {
             if(execvp(args[0], args) < 0)
             {
-                perror("Error, Execution Failed\n");
+                perror("Error, Execution Failed\n"); //If execvp returns a negative number, print an error message and then exit
                 exit(1);
             }
             return 0;
