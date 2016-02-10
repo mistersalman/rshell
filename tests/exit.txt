@@ -1,0 +1,5 @@
+echo ls -a
+ls -a
+echo exit
+exit
+

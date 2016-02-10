@@ -1,7 +1,9 @@
 # !/bin.bash
 # test exit
 
-g++ ../src/main.cpp
+cd ..
+make
+cd tests
 echo test strating
-../src/a.out < exit.txt
+../rshell.out < exit.txt
 echo "finished"
