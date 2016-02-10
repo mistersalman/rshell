@@ -1,0 +1,15 @@
+echo ls -a
+ls -a
+echo echo testing
+echo testing
+echo ls
+ls
+echo mkdir tmp
+mkdir tmp
+echo ls
+ls
+echo rm -r tmp
+rm -r tmp
+echo Exit
+Exit
+
