@@ -1,8 +1,8 @@
 CC = g++
 CC_FLAGS = -Wall -ansi -Werror -pedantic 
 EXEC = rshell.out
-SOURCES = $(wildcard *.cpp)
-OBJECTS = $(SOURCES:.cpp=.o)
+SOURCES = $(wildcard src/*.cpp)
+OBJECTS = $(SOURCES:src/.cpp=.o)
 
 $(EXEC): $(OBJECTS)
 	$(CC) $(OBJECTS) -o $(EXEC)

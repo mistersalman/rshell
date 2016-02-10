@@ -32,9 +32,9 @@ class Operand: public Base
 
     int execute()
     {
-        string exit = "exit";
+        string eXit = "exit";
         string Exit = "Exit";
-        if (data == exit || data == Exit)
+        if (data == eXit || data == Exit)
         {
             return -1; //manually check for exit and actually exit
         }
@@ -43,9 +43,14 @@ class Operand: public Base
         vector<char *> refs; //create vector with tokens from strtok
         char * pch;
         pch = strtok(dat, "/"); //initially used space as token, but found that we didn't need it
-        pch = strtok("/bin/bash", "/"); 
-        refs.push_back(pch); //this just makes it run
-        refs.push_back("-c"); //same
+        string tmp = "/bin/bash";
+        char* tmp2 = new char[tmp.length() + 1];
+        strcpy(tmp2, tmp.c_str());
+        refs.push_back(tmp2); //this just makes it run
+        tmp = "-c";
+        char* tmp3 = new char[tmp.length() +1];
+        strcpy(tmp3, tmp.c_str());
+        refs.push_back(tmp3); //same
 
         while(pch != NULL) //push back parts of command which have underwent strtok
         {
@@ -56,19 +61,12 @@ class Operand: public Base
         refs.push_back(NULL); //null at end to terminate execvp call once needed
 
         int j = -1;
-        for(unsigned i = 0; i < refs.size(); i++) //one more exit check, but no manual exit yet
-        {
-            if(refs.at(i) == "Exit" || refs.at(i) == "exit")
-            {
-                j = i;
-            }
-        }
         if(j == -1) //if there is no exit present in the string, reside array
         {
             j = refs.size();
         }
 
-        char *args[j]; //create array of char pointers with appropriate size
+        char* args[j]; //create array of char pointers with appropriate size
 
         for(int l = 0; l < j; l++) //copy over vector to char array
         {
@@ -95,7 +93,6 @@ class Operand: public Base
                 perror("Error, Execution Failed\n"); //If execvp returns a negative number, print an error message and then exit
                 exit(1);
             }
-            delete[] args;
             delete pch;
             delete[] dat;
             refs.~vector();
