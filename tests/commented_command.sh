@@ -4,5 +4,8 @@ echo "starting single test"
 cd ..
 make
 cd tests
-../rshell.out < comment.txt 
+../bin/rshell < comment.txt 
+cd ..
+make clean
+cd tests
 echo "finished"

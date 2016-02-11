@@ -5,5 +5,8 @@ cd ..
 make
 cd tests
 echo test strating
-../rshell.out < exit.txt
+../bin/rshell < exit.txt
+cd ..
+make clean
+cd tests
 echo "finished"

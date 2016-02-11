@@ -205,7 +205,8 @@ class Terminal
             {
                 if (this->commandList->execute() == -1)
                 {
-                    commandList->clean();
+                    cout << "out of execute" << endl;
+                    //commandList->clean();
                     delete commandList;
                     exit(0);
                 }

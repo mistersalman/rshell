@@ -1,15 +1,15 @@
-echo ls -a
-ls -a
-echo echo testing
-echo testing
-echo ls
-ls
-echo mkdir tmp
-mkdir tmp
-echo ls
-ls
-echo rm -r tmp
-rm -r tmp
+echo test && echo one && echo
+ls && ls -l && ls -a
+exho && echo test && echo two && echo
+ls || ls -a || ls -l
+echo && echo test && echo three
+ls-a || ls || ls -a
+echo test && echo four
+ls || exit
+echo test && echo five
+mkdir test && ls && rm -r test && ls
+echo test && echo six
+ls-a && ls || echo test worked
 echo Exit
 Exit
 
