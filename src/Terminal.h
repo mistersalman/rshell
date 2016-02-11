@@ -13,11 +13,13 @@ class Terminal
 
         void Run()
         {
-            //code to run the terminal
+            //sets up prompt
             GetLogin(login);
             GetHostName(hostName);
+            //set up infinite loop
             bool run = true;
             while(run){
+                //output prompt then gather input to run
                 cout << '[' << login << "@" << hostName << ']' << '$' << ' ';
                 ReadInput();
                 Execute();
@@ -46,7 +48,7 @@ class Terminal
 
         void ReadInput()
         {
-            //reads user input
+            //reads user input and calls Decipher to make command tree
             string command;
             getline(cin, command);
             if(command.find("#") != string::npos)
@@ -64,10 +66,14 @@ class Terminal
             string cmd = c;
             string op;
             string sep;
+            //goes through the command input looking through all chars and 
+            //finding parsing strings such as && then parses the string
+            //creating a command
             for (unsigned i = 0; i < cmd.size() - 1; ++i)
             {
                 if (cmd.at(i) == '&' && cmd.at(i+1) == '&')
                 {
+                    //empty list check to create first node
                     if (commandList == 0)
                     {
                         op = cmd.substr(0, i);
@@ -76,6 +82,9 @@ class Terminal
                         commandList = new Operand(op);
                         sep = "and";
                     }
+                    //creates operator based on what was last seen and
+                    //updates what operator was last seen while creating
+                    //the operator
                     else
                     {
                         op = cmd.substr(0, i);
@@ -100,6 +109,7 @@ class Terminal
                         sep = "and";
                     }
                 }
+                //all parts same as and parse
                 else if (cmd.at(i) == '|' && cmd.at(i+1) == '|')
                 {
                     if (commandList == 0)
@@ -135,6 +145,7 @@ class Terminal
                     }
 
                 }
+                //all parts same as and parse
                 else if (cmd.at(i) == ';')
                 {
                     if (commandList == 0)
@@ -171,11 +182,13 @@ class Terminal
 
                 }
             }
+            //creates inital node if none were created
             if (commandList == 0)
             {
                 tmp = new Operand(cmd);
                 commandList = tmp;
             }
+            //creates operator if node already exists
             else
             {
                 tmp = new Operand(cmd);
@@ -205,7 +218,6 @@ class Terminal
             {
                 if (this->commandList->execute() == -1)
                 {
-                    cout << "out of execute" << endl;
                     //commandList->clean();
                     delete commandList;
                     exit(0);
@@ -215,6 +227,7 @@ class Terminal
                 commandList->clean();
                 delete commandList;
             }
+            //make null pointer after delete to ensure seg falt on bad acess
             commandList = 0;
         }
 };

@@ -1,6 +1,8 @@
 #ifndef BASE_H
 #define BASE_H
 
+//pure virtual class to construct the tree with all virtual functions
+//for run time decisions
 class Base
 {
     public:
