@@ -206,11 +206,14 @@ class Terminal
                 if (this->commandList->execute() == -1)
                 {
                     commandList->clean();
+                    delete commandList;
                     exit(0);
                 }
             }
-            commandList->clean();
-            delete commandList;
+            else{
+                commandList->clean();
+                delete commandList;
+            }
             commandList = 0;
         }
 };

@@ -32,6 +32,17 @@ class Operand: public Base
 
     int execute()
     {
+        for (unsigned i = 0; i < data.length(); ++i)
+        {
+            if (data[0] == ' ')
+            {
+                data = data.substr(1, data.length()-1);
+            }
+            if (data[data.length()-1] == ' ')
+            {
+                data = data.substr(0, data.length()-1);
+            }
+        }
         string eXit = "exit";
         string Exit = "Exit";
         if (data == eXit || data == Exit)
@@ -66,7 +77,7 @@ class Operand: public Base
             j = refs.size();
         }
 
-        char* args[j]; //create array of char pointers with appropriate size
+        char** args = new char*[j]; //create array of char pointers with appropriate size
 
         for(int l = 0; l < j; l++) //copy over vector to char array
         {
@@ -93,6 +104,7 @@ class Operand: public Base
                 perror("Error, Execution Failed\n"); //If execvp returns a negative number, print an error message and then exit
                 exit(1);
             }
+            delete[] args;
             delete pch;
             delete[] dat;
             refs.~vector();

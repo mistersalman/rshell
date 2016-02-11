@@ -2,13 +2,16 @@ CC = g++
 CC_FLAGS = -Wall -ansi -Werror -pedantic 
 EXEC = rshell.out
 SOURCES = $(wildcard src/*.cpp)
-OBJECTS = $(SOURCES:src/.cpp=.o)
+OBJECTS = $(SOURCES:.cpp=.o)
 
 $(EXEC): $(OBJECTS)
+	mkdir bin
 	$(CC) $(OBJECTS) -o $(EXEC)
+	mv rshell.out bin
+	mv src/main.o bin
 
 %.o: %.cpp
 	$(CC) -c $(CC_FLAGS) $< -o $@
 
 clean:
-	rm -f $(EXEC) $(OBJECTS)
+	rm -r bin
