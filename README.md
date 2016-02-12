@@ -42,3 +42,7 @@ to recompile.
 (||) block, an error will be returned but there will be no progression in the
 command. For some reason, this causes problems in the test harness, but not
 when executing commands manually in ./a.out.
+
+5) Instead of using /bin/[command], we used /bin/bash/ as the first argument of
+a command. This does not cause any problems, but it is still different from the
+specs we were "recommended" to follow.
