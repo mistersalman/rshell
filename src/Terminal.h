@@ -55,7 +55,10 @@ class Terminal
             {
                 command = command.substr(0, command.find("#"));
             }
-            Decipher(command);
+            if (command != "")
+            {
+                Decipher(command);
+            }
         }
 
         void Decipher(string c)
