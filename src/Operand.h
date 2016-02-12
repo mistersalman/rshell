@@ -100,9 +100,13 @@ class Operand: public Base
         {
             int* status = new int;
             wait(status);
-            if(status != 0)
+            if(*status != 0)
             {
                 return 1;
+            }
+            else
+            {
+                return 0;
             }
         }
 

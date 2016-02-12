@@ -1,6 +1,6 @@
 # !/bin.bash
 
-echo "starting single test"
+echo "starting multiple test"
 cd ..
 make
 cd tests
