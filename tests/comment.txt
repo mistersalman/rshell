@@ -6,10 +6,12 @@ echo ls
 ls
 echo mkdir tmp
 mkdir tmp
-echo ls
-ls
+echo #ls
+#ls
 echo rm -r tmp
 rm -r tmp
+echo ls  #wombat -a
+ls  #wombat -a
 echo Exit
 Exit
 
