@@ -12,6 +12,8 @@ echo rm -rf tmp
 rm -rf tmp
 echo ls -a
 ls -a
+echo ls #ever since I was a boy I've dreamed of becoming a wombat -a
+ls #ever since I was a boy I've dreamed of becoming a wombat -a
 echo Exit
 Exit
 
