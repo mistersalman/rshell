@@ -185,8 +185,7 @@ class Terminal
             //creates inital node if none were created
             if (commandList == 0)
             {
-                tmp = new Operand(cmd);
-                commandList = tmp;
+                commandList = new Operand(cmd);
             }
             //creates operator if node already exists
             else
@@ -222,9 +221,7 @@ class Terminal
                     delete commandList;
                     exit(0);
                 }
-            }
-            else{
-                commandList->clean();
+                //commandList->clean();
                 delete commandList;
             }
             //make null pointer after delete to ensure seg falt on bad acess

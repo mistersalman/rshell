@@ -94,7 +94,10 @@ class Operand: public Base
 
         else if(pid != 0)
         {
-            wait(NULL);
+            if (wait(NULL) !=0)
+            {
+                return 1;
+            }
         }
 
         else if(pid == 0) //execvp is called when the process ID is 0, if not, it waits until the process ID is zero
@@ -103,10 +106,13 @@ class Operand: public Base
             {
                 perror("Error, Execution Failed\n"); //If execvp returns a negative number, print an error message and then exit
                 exit(1);
+                return 1;
             }
             delete[] args;
             delete pch;
             delete[] dat;
+            delete[] tmp3;
+            delete[] tmp2;
             refs.~vector();
             return 0;
         }
