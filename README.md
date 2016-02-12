@@ -32,6 +32,11 @@ bits, which is less than the value of an integer, so we will not need to
 worry about it.
 
 
-3) When running test scripts, the terminal complain that the commands mkdir and
+3) When running test scripts, the terminal complains that the commands mkdir and
 rm -r and rm -rf are outdated. While we cannot find any evidence of that, the
 terminal nonetheless returns warnings.
+
+4) If an ls with a flag but no space (ex, ls-a vs ls -a) is called before an or
+(||) block, an error will be returned but there will be no progression in the
+command. For some reason, this causes problems in the test harness, but not
+when executing commands manually in ./a.out.

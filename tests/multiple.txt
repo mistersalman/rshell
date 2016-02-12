@@ -7,7 +7,7 @@ ls-a || ls || ls -a
 echo test && echo four
 ls || exit
 echo test && echo five
-mkdir test && ls && rm -rf test && ls
+mkdir test ; ls ; rm -rf test ; ls
 echo test && echo six
 ls-a && ls || echo test worked
 echo brian or || ls
