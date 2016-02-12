@@ -94,7 +94,9 @@ class Operand: public Base
 
         else if(pid != 0)
         {
-            if (wait(NULL) !=0)
+            int* status = new int;
+            wait(status);
+            if(status != 0)
             {
                 return 1;
             }
@@ -106,7 +108,6 @@ class Operand: public Base
             {
                 perror("Error, Execution Failed\n"); //If execvp returns a negative number, print an error message and then exit
                 exit(1);
-                return 1;
             }
             delete[] args;
             delete pch;
@@ -114,7 +115,7 @@ class Operand: public Base
             delete[] tmp3;
             delete[] tmp2;
             refs.~vector();
-            return 0;
+            exit(0);
         }
         return 0;
     }
