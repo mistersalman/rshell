@@ -10,8 +10,8 @@ echo #ls
 #ls
 echo rm -r tmp
 rm -r tmp
-echo ls  #wombat -a
-ls  #wombat -a
+echo ls -a
+ls -a
 echo Exit
 Exit
 
