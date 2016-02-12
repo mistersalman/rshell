@@ -27,3 +27,11 @@ right now, rshell is incomplete, but will be as time progresses.
 1) cd is not working. This is not really a bug, but rather a flaw in execvp.
 
 
+2) We are experiencing memory leaks, although they are less than sixty-four
+bits, which is less than the value of an integer, so we will not need to
+worry about it.
+
+
+3) When running test scripts, the terminal complain that the commands mkdir and
+rm -r and rm -rf are outdated. While we cannot find any evidence of that, the
+terminal nonetheless returns warnings.

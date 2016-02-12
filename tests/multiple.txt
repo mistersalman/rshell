@@ -10,6 +10,8 @@ echo test && echo five
 mkdir test && ls && rm -rf test && ls
 echo test && echo six
 ls-a && ls || echo test worked
+echo brian or || ls
+brian or || ls
 echo Exit
 Exit
 
