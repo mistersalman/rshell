@@ -8,8 +8,8 @@ echo mkdir tmp
 mkdir tmp
 echo #ls
 #ls
-echo rm -r tmp
-rm -r tmp
+echo rm -rf tmp
+rm -rf tmp
 echo ls -a
 ls -a
 echo Exit
