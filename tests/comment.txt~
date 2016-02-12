@@ -1,0 +1,23 @@
+echo ls -a
+ls -a
+echo echo testing
+echo testing
+echo ls
+ls
+echo mkdir tmp
+mkdir tmp
+echo #ls
+#ls
+echo rm -rf tmp
+rm -rf tmp
+echo ls -a
+ls -a
+echo ls #ever since I was a boy I've dreamed of becoming a wombat -a
+ls #ever since I was a boy I've dreamed of becoming a wombat -a
+echo mkdir file#sys
+mkdir file#sys
+echo rm -rf file#sys
+rm -rf file#sys
+echo Exit
+Exit
+

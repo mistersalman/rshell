@@ -25,6 +25,8 @@ echo I && echo am && echo having && echo a && echo great && echo day
 ls-a || ls && echo ; echo
 echo true && echo fale || echo one fish ; echo two fish || echo red fish && echo blue fish
 echo empty and &&
+echo empty or ||
+echo empty semicolon ;
 echo Exit
 Exit
 

@@ -12,7 +12,6 @@ echo rm -rf tmp
 rm -rf tmp
 echo Hi Brian. How are you today?
 cat single.txt
-
 echo Exit
 Exit
 

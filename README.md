@@ -35,6 +35,8 @@ worry about it.
 3) When running test scripts, the terminal complains that the commands mkdir and
 rm -r and rm -rf are outdated. While we cannot find any evidence of that, the
 terminal nonetheless returns warnings.
+This is from the makefile. You must also run make clean before using make 
+to recompile.
 
 4) If an ls with a flag but no space (ex, ls-a vs ls -a) is called before an or
 (||) block, an error will be returned but there will be no progression in the

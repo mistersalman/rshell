@@ -190,9 +190,13 @@ class Terminal
                     {
                         cmd = " ";
                     }
+                    cout << i << endl;
+                    cout << cmd << endl << endl;
                     i = 0;
+                    cout << cmd.size() << endl;
                 }
             }
+            cout << "end for loop" << endl << endl;
             //creates inital node if none were created
             if (commandList == 0)
             {

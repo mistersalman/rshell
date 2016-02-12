@@ -47,10 +47,6 @@ class Operand: public Base
                 data = data.substr(0, data.length()-1);
             }
         }
-        if (data == "")
-        {
-            return 1;
-        }
         string eXit = "exit";
         string Exit = "Exit";
         if (data == eXit || data == Exit)
