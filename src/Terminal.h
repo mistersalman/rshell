@@ -224,7 +224,7 @@ class Terminal
                 //commandList->clean();
                 delete commandList;
             }
-            //make null pointer after delete to ensure seg falt on bad acess
+            //make null pointer after delete to ensure seg fault on bad access
             commandList = 0;
         }
 };

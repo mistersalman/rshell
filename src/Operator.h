@@ -11,7 +11,7 @@ class Operator: public Base
     virtual int execute() = 0;
 
     public:
-    //function to clean the tree deleting childeren
+    //function to clean the tree deleting children
     void clean()
     {
         leftChild->clean();
@@ -20,7 +20,7 @@ class Operator: public Base
         delete rightChild;
     }
 
-    //deconstructor removing childeren
+    //deconstructor removing children
     ~Operator()
     {
         delete rightChild;

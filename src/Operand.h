@@ -49,11 +49,13 @@ class Operand: public Base
         {
             return -1; //manually check for exit and actually exit
         }
-        char *dat = new char[data.length() + 1]; //create c-string with one extra space for NULL
+        char *dat = new char[data.length() + 1]; //create c-string with one 
+        //extra space for NULL
         strcpy(dat, data.c_str());
         vector<char *> refs; //create vector with tokens from strtok
         char * pch;
-        pch = strtok(dat, "/"); //initially used space as token, but found that we didn't need it
+        pch = strtok(dat, "/"); //initially used space as token, but found that 
+        //we didn't need it
         string tmp = "/bin/bash";
         char* tmp2 = new char[tmp.length() + 1];
         strcpy(tmp2, tmp.c_str());
@@ -63,7 +65,8 @@ class Operand: public Base
         strcpy(tmp3, tmp.c_str());
         refs.push_back(tmp3); //same
 
-        while(pch != NULL) //push back parts of command which have underwent strtok
+        while(pch != NULL) //push back parts of command which have underwent 
+        //strtok
         {
             refs.push_back(pch);
             pch = NULL;
@@ -77,7 +80,8 @@ class Operand: public Base
             j = refs.size();
         }
 
-        char** args = new char*[j]; //create array of char pointers with appropriate size
+        char** args = new char*[j]; //create array of char pointers with 
+        //appropriate size
 
         for(int l = 0; l < j; l++) //copy over vector to char array
         {
@@ -102,11 +106,13 @@ class Operand: public Base
             }
         }
 
-        else if(pid == 0) //execvp is called when the process ID is 0, if not, it waits until the process ID is zero
+        else if(pid == 0) //execvp is called when the process ID is 0, if not, 
+        //it waits until the process ID is zero
         {
             if(execvp(args[0], args) < 0)
             {
-                perror("Error, Execution Failed\n"); //If execvp returns a negative number, print an error message and then exit
+                perror("Error, Execution Failed\n"); //If execvp returns a 
+                //negative number, print an error message and then exit
                 exit(1);
             }
             delete[] args;
