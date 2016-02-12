@@ -26,4 +26,4 @@ rshell: $(OBJECTS)
 	$(CC) -c $(CC_FLAGS) $< -o $@
 
 clean:
-	rm -r bin
+	rm -rf bin
