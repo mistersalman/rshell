@@ -100,7 +100,7 @@ class Operand: public Base
 
         if(pid  < 0) //negative process IDs are errors - exit
         {
-            printf("Serious Error.\n");
+            perror("Serious Error.\n");
             exit(1);
         }
 
@@ -111,6 +111,10 @@ class Operand: public Base
             if(*status != 0)
             {
                 return 1;
+            }
+            else if (*status < 0)
+            {
+                perror("wait error\n");
             }
             else
             {
