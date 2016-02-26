@@ -61,6 +61,58 @@ class Terminal
             }
         }
 
+        void extendTree(Base* tmp, string sep)
+        {
+            Base* tmp2;
+            if (sep == "and")
+            {
+                tmp2 = new And(commandList, tmp);
+                commandList = tmp2;
+            }
+            else if (sep == "or")
+            {
+                tmp2 = new  Or(commandList, tmp);
+                commandList = tmp2;
+            }
+            else if (sep == "semicolon")
+            {
+                tmp2 = new Semicolon(commandList, tmp);
+                commandList = tmp2;
+            }
+        }
+
+        void parenthesesFound(string cmd;)
+        {
+            for (int i = 0; i < cmd.size(); ++i)
+            {
+                if (cmd.at(i) == '(')
+                {
+                    for(int j = i; count != 0 && j < cmd.size(); ++ j)
+                    {
+                        if (cmd.at(j) == '(')
+                        {
+                            count++;
+                        }
+                        else if (cmd.at(j) == ')')
+                        {
+                            count--;
+                        }
+                        if (count == 0)
+                        {
+                            //parse string and call recursively. string needs
+                            //to be extracted that is a sub () set and then 
+                            //removed from the cmd string. something like
+                            //cmd = cmd.sub_str(0, i) + cmd.sub_str(j, cmd.size() -1);
+                            //then reset i to 0 and keep running untill all sub ()
+                            //have been removed
+                        }
+                    }
+                }
+                //run parsing for && || and ; but creating a
+                //Parentheses Class and adding it to tree;
+            }
+        }
+
         void Decipher(string c)
         {
             //use keystroke to separate keywords from input stored
@@ -75,6 +127,24 @@ class Terminal
             //creating a command
             for (unsigned i = 0; i < cmd.size()-1; ++i)
             {
+                if (cmd.at(i) == '(')
+                {
+                    for(int j = i; count != 0 && j < cmd.size(); ++ j)
+                    {
+                        if (cmd.at(j) == '(')
+                        {
+                            count++;
+                        }
+                        else if (cmd.at(j) == ')')
+                        {
+                            count--;
+                        }
+                        if (count == 0)
+                        {
+                            //parse out () stuff and pass into function
+                        }
+                    
+                }
                 if (cmd.at(i) == '&' && cmd.at(i+1) == '&')
                 {
                     detected = true;
@@ -92,21 +162,7 @@ class Terminal
                     {
                         op = cmd.substr(0, i);
                         tmp = new Operand(op);
-                        if (sep == "and")
-                        {
-                            tmp2 = new And(commandList, tmp);
-                            commandList = tmp2;
-                        }
-                        else if (sep == "or")
-                        {
-                            tmp2 = new  Or(commandList, tmp);
-                            commandList = tmp2;
-                        }
-                        else if (sep == "semicolon")
-                        {
-                            tmp2 = new Semicolon(commandList, tmp);
-                            commandList = tmp2;
-                        }
+                        extendTree(tmp, sep);
                         sep = "and";
                     }
                 }
@@ -124,21 +180,7 @@ class Terminal
                     {
                         op = cmd.substr(0, i);
                         tmp = new Operand(op);
-                        if (sep == "and")
-                        {
-                            tmp2 = new And(commandList, tmp);
-                            commandList = tmp2;
-                        }
-                        else if (sep == "or")
-                        {
-                            tmp2 = new  Or(commandList, tmp);
-                            commandList = tmp2;
-                        }
-                        else if (sep == "semicolon")
-                        {
-                            tmp2 = new Semicolon(commandList, tmp);
-                            commandList = tmp2;
-                        }
+                        extendTree(tmp, sep);
                         sep = "or";
                     }
 
@@ -160,21 +202,7 @@ class Terminal
                         cmd = cmd.substr(i+1, cmd.size());
                         i = 0;
                         tmp = new Operand(op);
-                        if (sep == "and")
-                        {
-                            tmp2 = new And(commandList, tmp);
-                            commandList = tmp2;
-                        }
-                        else if (sep == "or")
-                        {
-                            tmp2 = new  Or(commandList, tmp);
-                            commandList = tmp2;
-                        }
-                        else if (sep == "semicolon")
-                        {
-                            tmp2 = new Semicolon(commandList, tmp);
-                            commandList = tmp2;
-                        }
+                        extendTree(tmp, sep);
                         sep = "semicolon";
                     }
 
