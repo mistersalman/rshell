@@ -1,5 +1,8 @@
 #include "Base.h"
 
+#ifndef PARENTHESES_H
+#define PARENTHESES_H
+
 class Parentheses : public Base
 {
     public:
@@ -10,7 +13,13 @@ class Parentheses : public Base
         return Child->execute();
     }
 
+    ~Parentheses() {delete Child;};
+
+    void clean() {};
+
     private:
         Base* Child;
 
 };
+
+#endif
