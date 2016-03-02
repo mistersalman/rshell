@@ -62,7 +62,7 @@ class Operand: public Base
         if(data.substr(0, 4) == "test")
         {
             //check for flag and use as parameter if necessary
-            data = data.substr(4, data.length() - 4);
+            data = data.substr(5, data.length() - 4);
             if(data.substr(0, 1) == "-")
             {
                 return testCommand(data.substr(0, 2), data.substr(3, data.length() - 2));
@@ -76,7 +76,7 @@ class Operand: public Base
         if(data.substr(0, 1) == "[" && data.substr(data.length() - 1, 1) == "]")
         {
             //check for flag and use as parameter if necessary
-            data = data.substr(1, data.length() - 1);
+            data = data.substr(1, data.length() - 2);
             if(data.substr(0, 1) == "-")
             {
                 return testCommand(data.substr(0, 2), data.substr(3, data.length() - 2));
