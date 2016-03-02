@@ -7,6 +7,7 @@
 #include <iostream>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
 #include <stdlib.h>
 
 using namespace std;
@@ -57,6 +58,35 @@ class Operand: public Base
         {
             return -1; //manually check for exit and actually exit
         }
+        //if test is explicitly called, remove it and process data as follows
+        if(data.substr(0, 4) == "test")
+        {
+            //check for flag and use as parameter if necessary
+            data = data.substr(4, data.length() - 4);
+            if(data.substr(0, 1) == "-")
+            {
+                return testCommand(data.substr(0, 2), data.substr(3, data.length() - 2));
+            }
+            else
+            {
+                return testCommand("emptyflag", data);
+            }
+        }
+        //check if test is called using square brackets
+        if(data.substr(0, 1) == "[" && data.substr(data.length() - 1, 1) == "]")
+        {
+            //check for flag and use as parameter if necessary
+            data = data.substr(1, data.length() - 1);
+            if(data.substr(0, 1) == "-")
+            {
+                return testCommand(data.substr(0, 2), data.substr(3, data.length() - 2));
+            }
+            else
+            {
+                return testCommand("emptyflag", data);
+            }
+        }
+
         char *dat = new char[data.length() + 1]; //create c-string with one 
         //extra space for NULL
         strcpy(dat, data.c_str());
@@ -140,5 +170,42 @@ class Operand: public Base
             exit(0);
         }
         return 0;
+    }
+    
+    int testCommand(string flag, string filepath)
+    {
+        //Use stat function as explained in tutorial
+        struct stat sb;
+        //Need to convert string to const char
+        const char *path = filepath.c_str();
+        if(flag == "noflag" || flag == "-e")
+        {
+            //if no flag is present or flag is -e, check only for existence
+            if(stat(path, &sb) == 0)
+            {
+                cout << "(True)" << endl;
+                return stat(path, &sb);
+            }
+        }
+        else if(flag == "-d")
+        {
+            //if flag is -d, check for directory
+            if(stat(path, &sb) == 0 && S_ISDIR(sb.st_mode))
+            {
+                cout << "(True)" << endl;
+                return 0;
+            }
+        }
+        else if(flag == "-f")
+        {
+            //if flag is -f, check for regular file
+            if(stat(path, &sb) == 0 && S_ISREG(sb.st_mode))
+            {
+                cout << "(True)" << endl;
+                return 0;
+            }
+        }
+        cout << "(False)" << endl;
+        return 1;
     }
 };
