@@ -32,6 +32,7 @@ class Operand: public Base
 
     int execute()
     {
+        cout << data << endl;
         if (data == "")
         {
             return 1;

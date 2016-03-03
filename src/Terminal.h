@@ -88,14 +88,14 @@ class Terminal
             bool detected = false;
             string op;
             Base* tmp;
+            Base* tmp2;
             Base* parenthesesTree = 0;
-            cout << "found parentheses: " << cmd << endl;
             for (unsigned i = 0; i < cmd.size(); ++i)
             {
                 if (cmd.at(i) == '(')
                 {
-                    unsigned count = 0;
-                    for(unsigned j = i; count != 0 && j < cmd.size(); ++ j)
+                    unsigned count = 1;
+                    for(unsigned j = i + 1; count != 0 && j < cmd.size(); ++ j)
                     {
                         if (cmd.at(j) == '(')
                         {
@@ -113,10 +113,55 @@ class Terminal
                             //cmd = cmd.sub_str(0, i) + cmd.sub_str(j, cmd.size() -1);
                             //then reset i to 0 and keep running untill all sub ()
                             //have been removed
+                            Base* tmp3;
                             string tmp = cmd.substr(i+1, j-i-1);
-                            parenthesesFound(tmp);
+                            cout << tmp << endl;
+                            tmp3 = parenthesesFound(tmp);
                             cmd = cmd.substr(j+1, cmd.size()-1);
                             i = 0;
+                            if (parenthesesTree == 0)
+                            {
+                                parenthesesTree = tmp3;
+                            }
+                            else
+                            {
+                                extendTree(tmp3, sep, parenthesesTree);
+                            }
+                            if (cmd.size() != 0)
+                            {
+                                for (unsigned k = 0; cmd.size() + 1 > k; ++k)
+                                {
+                                    if (cmd.at(k) == '&' && cmd.at(k+1) == '&')
+                                    {
+                                       sep = "and";
+                                       detected = true;
+                                    }
+                                    else if ((cmd.at(k) == '|') && (cmd.at(k+1) == '|'))
+                                    {
+                                        sep = "or";
+                                        detected = true;
+                                    }
+                                    else if (cmd.at(k) == ';')
+                                    {
+                                        sep = "semicolon";
+                                        cmd = cmd.substr(k+1, cmd.size()-1);
+                                    }
+                                    if (detected)
+                                    {
+                                        if (cmd.size() > k+2)
+                                        {
+                                            cmd = cmd.substr(k+2, cmd.size());
+                                        }
+                                        else
+                                        {
+                                            cmd = " ";
+                                        }
+                                        k = 0;
+                                    }
+                                    if (detected) break; 
+                                }
+                                detected = false;
+                            }
  
                         }
                     }
@@ -128,10 +173,10 @@ class Terminal
                 {
                     detected = true;
                     //empty list check to create first node
-                    if (commandList == 0)
+                    if (parenthesesTree == 0)
                     {
                         op = cmd.substr(0, i);
-                        commandList = new Operand(op);
+                        parenthesesTree = new Operand(op);
                         sep = "and";
                     }
                     //creates operator based on what was last seen and
@@ -149,10 +194,10 @@ class Terminal
                 else if (cmd.at(i) == '|' && cmd.at(i+1) == '|')
                 {
                     detected = true;
-                    if (commandList == 0)
+                    if (parenthesesTree == 0)
                     {
                         op = cmd.substr(0, i);
-                        commandList = new Operand(op);
+                        parenthesesTree = new Operand(op);
                         sep = "or";
                     }
                     else
@@ -167,12 +212,12 @@ class Terminal
                 //all parts same as and parse
                 else if (cmd.at(i) == ';')
                 {
-                    if (commandList == 0)
+                    if (parenthesesTree == 0)
                     {
                         op = cmd.substr(0, i);
                         cmd = cmd.substr(i+1, cmd.size()-1);
                         i = 0;
-                        commandList = new Operand(op);
+                        parenthesesTree = new Operand(op);
                         sep = "semicolon";
                     }
                     else
@@ -200,7 +245,33 @@ class Terminal
                     i = 0;
                 }
             }
-            parenthesesTree = new Parentheses(parenthesesTree);
+
+            if (parenthesesTree == 0)
+            {
+                parenthesesTree= new Operand(cmd);
+            }
+            //creates operator if node already exists
+            else
+            {
+                tmp = new Operand(cmd);
+                if (sep == "and")
+                {
+                    tmp2 = new And(parenthesesTree, tmp);
+                    parenthesesTree= tmp2;
+                }
+                else if (sep == "or")
+                {
+                    tmp2 = new  Or(parenthesesTree, tmp);
+                    parenthesesTree= tmp2;
+                }
+                else if (sep == "semicolon")
+                {
+                    tmp2 = new Semicolon(parenthesesTree, tmp);
+                    parenthesesTree= tmp2;
+                }
+            }
+ 
+//            parenthesesTree = new Parentheses(parenthesesTree);
             return parenthesesTree;
         }
 
@@ -233,15 +304,59 @@ class Terminal
                         }
                         if (count == 0)
                         {
+                            Base* tmp3;
                             string tmp = cmd.substr(i+1, j-i-1);
-                            parenthesesFound(tmp);
+                            tmp3 = parenthesesFound(tmp);
                             cmd = cmd.substr(j+1, cmd.size()-1);
                             i = 0;
+                            if (commandList == 0)
+                            {
+                                commandList = tmp3;
+                            }
+                            else
+                            {
+                                extendTree(tmp3, sep, commandList);
+                            }
+                            if (cmd.size() != 0)
+                            {
+                                for (unsigned k = 0; cmd.size() + 1 > k; ++k)
+                                {
+                                    if (cmd.at(k) == '&' && cmd.at(k+1) == '&')
+                                    {
+                                       sep = "and";
+                                       detected = true;
+                                    }
+                                    else if ((cmd.at(k) == '|') && (cmd.at(k+1) == '|'))
+                                    {
+                                        sep = "or";
+                                        detected = true;
+                                    }
+                                    else if (cmd.at(k) == ';')
+                                    {
+                                        sep = "semicolon";
+                                        cmd = cmd.substr(k+1, cmd.size()-1);
+                                    }
+                                    if (detected)
+                                    {
+                                        if (cmd.size() > k+2)
+                                        {
+                                            cmd = cmd.substr(k+2, cmd.size());
+                                        }
+                                        else
+                                        {
+                                            cmd = " ";
+                                        }
+                                        k = 0;
+                                    }
+                                    if (detected) break; 
+                                }
+                                detected = false;
+                            }
                         }
                         else if (j + 1 == cmd.size())
                         {
                             cmd = "";
-                            cout << "Syntax error" << endl;
+                            cout << "Syntax Error" << endl;
                             return;
                         }
                     }
