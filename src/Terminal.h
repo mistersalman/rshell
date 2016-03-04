@@ -62,23 +62,23 @@ class Terminal
             }
         }
 
-        void extendTree(Base* tmp, string sep, Base* addTo)
+        void extendTree(Base* tmp, string sep, Base* &addTo)
         {
             Base* tmp2;
             if (sep == "and")
             {
                 tmp2 = new And(addTo, tmp);
-                commandList = tmp2;
+                addTo = tmp2;
             }
             else if (sep == "or")
             {
                 tmp2 = new  Or(addTo, tmp);
-                commandList = tmp2;
+                addTo = tmp2;
             }
             else if (sep == "semicolon")
             {
                 tmp2 = new Semicolon(addTo, tmp);
-                commandList = tmp2;
+                addTo = tmp2;
             }
         }
 
@@ -107,16 +107,9 @@ class Terminal
                         }
                         if (count == 0)
                         {
-                            //parse string and call recursively. string needs
-                            //to be extracted that is a sub () set and then 
-                            //removed from the cmd string. something like
-                            //cmd = cmd.sub_str(0, i) + cmd.sub_str(j, cmd.size() -1);
-                            //then reset i to 0 and keep running untill all sub ()
-                            //have been removed
                             Base* tmp3;
-                            string tmp = cmd.substr(i+1, j-i-1);
-                            cout << tmp << endl;
-                            tmp3 = parenthesesFound(tmp);
+                            string str_tmp = cmd.substr(i+1, j-i-1);
+                            tmp3 = parenthesesFound(str_tmp);
                             cmd = cmd.substr(j+1, cmd.size()-1);
                             i = 0;
                             if (parenthesesTree == 0)
@@ -304,18 +297,17 @@ class Terminal
                         }
                         if (count == 0)
                         {
-                            Base* tmp3;
-                            string tmp = cmd.substr(i+1, j-i-1);
-                            tmp3 = parenthesesFound(tmp);
+                            string str_tmp = cmd.substr(i+1, j-i-1);
+                            tmp = parenthesesFound(str_tmp);
                             cmd = cmd.substr(j+1, cmd.size()-1);
                             i = 0;
                             if (commandList == 0)
                             {
-                                commandList = tmp3;
+                                commandList = tmp;
                             }
                             else
                             {
-                                extendTree(tmp3, sep, commandList);
+                                extendTree(tmp, sep, commandList);
                             }
                             if (cmd.size() != 0)
                             {
@@ -477,7 +469,7 @@ class Terminal
                     delete commandList;
                     exit(0);
                 }
-                //commandList->clean();
+               // commandList->clean();
                 delete commandList;
             }
             //make null pointer after delete to ensure seg fault on bad access

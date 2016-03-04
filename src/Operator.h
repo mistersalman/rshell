@@ -5,7 +5,7 @@
 
 class Operator: public Base
 {
-    protected:
+    public:
     Base* leftChild;
     Base* rightChild;
     virtual int execute() = 0;

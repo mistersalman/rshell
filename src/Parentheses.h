@@ -15,7 +15,7 @@ class Parentheses : public Base
 
     ~Parentheses() {delete Child;};
 
-    void clean() {};
+    void clean() {delete Child;};
 
     private:
         Base* Child;
