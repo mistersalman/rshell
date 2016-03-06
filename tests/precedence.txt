@@ -1,0 +1,15 @@
+(ls -a) && echo
+(ls -a) || echo
+(ls -a) ; echo
+(ls-a) && echo
+(ls-a) || echo
+(ls-a) ; echo
+echo && (ls)
+echo || (ls)
+echo ; (ls)
+(()
+ls && (ls -a && (ls -l))
+ls && (ls -a && ls -l)
+ls && (echo) && ls -a
+exit
+

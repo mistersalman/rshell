@@ -120,7 +120,7 @@ class Terminal
                             {
                                 extendTree(tmp3, sep, parenthesesTree);
                             }
-                            if (cmd.size() != 0)
+                            if (cmd.size() > 1)
                             {
                                 for (unsigned k = 0; cmd.size() + 1 > k; ++k)
                                 {
@@ -134,11 +134,6 @@ class Terminal
                                         sep = "or";
                                         detected = true;
                                     }
-                                    else if (cmd.at(k) == ';')
-                                    {
-                                        sep = "semicolon";
-                                        cmd = cmd.substr(k+1, cmd.size()-1);
-                                    }
                                     if (detected)
                                     {
                                         if (cmd.size() > k+2)
@@ -151,6 +146,12 @@ class Terminal
                                         }
                                         k = 0;
                                     }
+                                    if (cmd.at(k) == ';')
+                                    {
+                                        sep = "semicolon";
+                                        cmd = cmd.substr(k+1, cmd.size()-1);
+                                        detected = true;
+                                    }
                                     if (detected) break; 
                                 }
                                 detected = false;
@@ -161,7 +162,7 @@ class Terminal
                 }
                 //run parsing for && || and ; but creating a
                 //Parentheses Class and adding it to tree;
-                if (cmd.size() == 0) break;
+                if (cmd.size() <= 1) break;
                 if (cmd.at(i) == '&' && cmd.at(i+1) == '&')
                 {
                     detected = true;
@@ -309,7 +310,7 @@ class Terminal
                             {
                                 extendTree(tmp, sep, commandList);
                             }
-                            if (cmd.size() != 0)
+                            if (cmd.size() > 1)
                             {
                                 for (unsigned k = 0; cmd.size() + 1 > k; ++k)
                                 {
@@ -323,11 +324,6 @@ class Terminal
                                         sep = "or";
                                         detected = true;
                                     }
-                                    else if (cmd.at(k) == ';')
-                                    {
-                                        sep = "semicolon";
-                                        cmd = cmd.substr(k+1, cmd.size()-1);
-                                    }
                                     if (detected)
                                     {
                                         if (cmd.size() > k+2)
@@ -339,6 +335,12 @@ class Terminal
                                             cmd = " ";
                                         }
                                         k = 0;
+                                    }
+                                    if (cmd.at(k) == ';')
+                                    {
+                                        sep = "semicolon";
+                                        cmd = cmd.substr(k+1, cmd.size()-1);
+                                        detected = true;
                                     }
                                     if (detected) break; 
                                 }
@@ -353,7 +355,7 @@ class Terminal
                         }
                     }
                 }
-                if (cmd.size() == 0) break;
+                if (cmd.size() <= 1) break;
                 if (cmd.at(i) == '&' && cmd.at(i+1) == '&')
                 {
                     detected = true;

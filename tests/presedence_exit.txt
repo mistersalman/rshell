@@ -1,0 +1,6 @@
+ls -a || (exit) && echo continue
+(ls -a && ls) || exit
+ls -a && (echo || exit)
+ls -a || (echo stay && echo here) ; exit
+exit
+
