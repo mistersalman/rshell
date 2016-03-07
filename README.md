@@ -21,6 +21,20 @@ right now, rshell is incomplete, but will be as time progresses.
 
     bin/rshell
 
+**Functionality:**
+
+As of right now, rshell is capable of the following:
+
+1) Reading in commands
+
+2) Parsing connectors to multiple commands
+
+3) Parsing parentheses to denote precedence
+
+4) Executing commands
+
+5) Running test commands to see if a file or directory exists
+
 **Bugs:**
 
 
