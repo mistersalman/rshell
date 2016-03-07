@@ -1,0 +1,41 @@
+echo "Create directory named testDirectory"
+mkdir testDirectory
+echo "Create file named testFile"
+touch testFile
+echo ls
+ls
+echo "test for Directory using keyword test (blank, -e, -d, -f in that order)"
+test testDirectory
+test -e testDirectory
+test -d testDirectory
+test -f testDirectory
+echo "expected TTTF"
+echo "test for Directory using bracket symbol for test (blank, -e, -d, -f)"
+[testDirectory]
+[-e testDirectory]
+[-d testDirectory]
+[-f testDirectory]
+echo "expected TTTF"
+
+echo "test for File using keyword test (blank, -e, -f, -d in that order)"
+test testFile
+test -e testFile
+test -f testFile
+test -d testFile
+echo "expected TTTF"
+echo "test for File using bracket symbol for test (blank, -e, -f, -d)"
+[testFile]
+[-e testFile]
+[-f testFile]
+[-d testFile]
+echo "expected TTTF"
+
+echo "Removing test file and directory"
+rm -rf testDirectory
+rm testFile
+echo ls
+ls
+
+echo Exit
+Exit
+
