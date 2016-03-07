@@ -63,14 +63,22 @@ class Operand: public Base
         {
             if(data.length() == 4 || data.length() == 5)
             {
-                cout << "Nothing to test." << endl;
+                cout << "Error: Nothing to test." << endl;
                 return 1;
             }
             //check for flag and use as parameter if necessary
             data = data.substr(5, data.length() - 4);
             if(data.substr(0, 1) == "-")
             {
-                return testCommand(data.substr(0, 2), data.substr(3, data.length() - 2));
+                if(data.length() == 2)
+                {
+                    cout << "Error: Nothing to test." << endl;
+                    return 1;
+                }
+                else
+                {
+                    return testCommand(data.substr(0, 2), data.substr(3, data.length() - 2));
+                }
             }
             else
             {
@@ -82,14 +90,22 @@ class Operand: public Base
         {
             if(data.length() == 2 || data.length() == 3)
             {
-                cout << "Nothing to test." << endl;
+                cout << "Error: Nothing to test." << endl;
                 return 1;
             }
             //check for flag and use as parameter if necessary
             data = data.substr(1, data.length() - 2);
             if(data.substr(0, 1) == "-")
             {
-                return testCommand(data.substr(0, 2), data.substr(3, data.length() - 2));
+                if(data.length() <= 2)
+                {
+                    cout << "Error: Nothing to test." << endl;
+                    return 1;
+                }
+                else
+                {
+                    return testCommand(data.substr(0, 2), data.substr(3, data.length() - 2));
+                }
             }
             else
             {
