@@ -4,37 +4,57 @@ echo "Create file named testFile"
 touch testFile
 echo ls
 ls
-echo "test for Directory using keyword test (blank, -e, -d, -f in that order)"
+echo "test for Directory using keyword test"
 test testDirectory
 test -e testDirectory
 test -d testDirectory
 test -f testDirectory
 echo "expected TTTF"
-echo "test for Directory using bracket symbol for test (blank, -e, -d, -f)"
+echo "test for Directory using bracket test"
 [testDirectory]
 [-e testDirectory]
 [-d testDirectory]
 [-f testDirectory]
 echo "expected TTTF"
 
-echo "test for File using keyword test (blank, -e, -f, -d in that order)"
+echo "test for File using keyword test"
 test testFile
 test -e testFile
 test -f testFile
 test -d testFile
 echo "expected TTTF"
-echo "test for File using bracket symbol for test (blank, -e, -f, -d)"
+echo "test for File using bracket test"
 [testFile]
 [-e testFile]
 [-f testFile]
 [-d testFile]
 echo "expected TTTF"
 
+echo "testing nonexistent objects for existence using name testFil"
+echo "instead of testFile"
+[testFil]
+test testFil
+echo "expected FF"
+
 echo "Removing test file and directory"
 rm -rf testDirectory
 rm testFile
 echo ls
 ls
+
+echo "Incorrect syntax tests with no flags" 
+test
+[]
+echo "expected FF"
+
+echo "Incorrect syntax tests with all flags"
+test -e
+test -f
+test -d
+[-e]
+[-f]
+[-d]
+echo "expected FFFFFF"
 
 echo Exit
 Exit
