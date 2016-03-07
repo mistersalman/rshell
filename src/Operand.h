@@ -61,6 +61,7 @@ class Operand: public Base
         //if test is explicitly called, remove it and process data as follows
         if(data.substr(0, 4) == "test")
         {
+            //If it's just test or test with a space, return error
             if(data.length() == 4 || data.length() == 5)
             {
                 cout << "Error: Nothing to test." << endl;
@@ -70,7 +71,8 @@ class Operand: public Base
             data = data.substr(5, data.length() - 4);
             if(data.substr(0, 1) == "-")
             {
-                if(data.length() == 2)
+                //if there's only a flag, return error
+                if(data.length() <= 2)
                 {
                     cout << "Error: Nothing to test." << endl;
                     return 1;
@@ -88,6 +90,7 @@ class Operand: public Base
         //check if test is called using square brackets
         if(data.substr(0, 1) == "[" && data.substr(data.length() - 1, 1) == "]")
         {
+            //If it's just brackets or brackets with space, return error
             if(data.length() == 2 || data.length() == 3)
             {
                 cout << "Error: Nothing to test." << endl;
@@ -97,6 +100,7 @@ class Operand: public Base
             data = data.substr(1, data.length() - 2);
             if(data.substr(0, 1) == "-")
             {
+                //if there's only a flag, return error
                 if(data.length() <= 2)
                 {
                     cout << "Error: Nothing to test." << endl;
