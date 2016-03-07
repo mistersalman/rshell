@@ -188,7 +188,7 @@ class Operand: public Base
         struct stat sb;
         //Need to convert string to const char
         const char *path = filepath.c_str();
-        if(flag == "noflag" || flag == "-e")
+        if(flag == "emptyflag" || flag == "-e")
         {
             //if no flag is present or flag is -e, check only for existence
             if(stat(path, &sb) == 0)
